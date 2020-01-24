@@ -1,0 +1,31 @@
+.counter {
+  max-width: 300px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.counter .controlButtons {
+  display: flex;
+  justify-content: center;
+}
+
+.counter button {
+  background-color: green;
+  font-size: 1rem;
+  color: white;
+  padding: 10px 30px;
+  width: 100%;
+}
+
+.counter .resetButton {
+  background-color: red;
+}
+
+.counter .count {
+  font-size: 2rem;
+  font-weight: 600;
+  padding: 15px;
+}
