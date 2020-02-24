@@ -9,7 +9,6 @@ class AuthenticationService {
 
   isLoggedin() {
     let authenticated = sessionStorage.getItem("authenticatedUser");
-    // console.log(authenticated);
     if (authenticated != null) {
       return true;
     } else {

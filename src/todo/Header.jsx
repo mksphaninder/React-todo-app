@@ -6,7 +6,6 @@ import { withRouter } from "react-router";
 class Header extends Component {
   render() {
     const auth = AuthenticationService.isLoggedin();
-    // console.log(auth);
     return (
       <>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
