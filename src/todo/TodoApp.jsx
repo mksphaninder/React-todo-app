@@ -8,6 +8,7 @@ import Welcome from "./Welcome";
 import ListTodos from "./listTodo";
 import ErrorPage from "./ErrorPage";
 import Footer from "./Footer";
+import TodoComponent from "./TodoComponent";
 class TodoApp extends Component {
   render() {
     return (
@@ -17,18 +18,29 @@ class TodoApp extends Component {
             <Header />
             <Switch>
               <Route path="/" exact component={Login} />
+
               <Route path="/login" exact component={Login} />
+
               <AuthenticationRoute path="/logout" exact component={Logout} />
+
               <AuthenticationRoute
                 path="/welcome/:username"
                 exact
                 component={Welcome}
               />
+
+              <AuthenticationRoute
+                path="/todo/:id"
+                exact
+                component={TodoComponent}
+              />
+              
               <AuthenticationRoute
                 path="/list-todo"
                 exact
                 component={ListTodos}
               />
+              
               <AuthenticationRoute component={ErrorPage} />
             </Switch>
             <Footer />

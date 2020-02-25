@@ -27,6 +27,7 @@ class ListTodos extends Component {
                   <th scope="col">Target Date</th>
                   <th scope="col">Is done?</th>
                   <th scope="col">Actions</th>
+                  <th scope="col"></th>
                 </tr>
               </thead>
               <tbody>
@@ -37,6 +38,7 @@ class ListTodos extends Component {
                     <td>{todo.targetDate.toString()}</td>
                     <td>{todo.done.toString()}</td>
                     <td><button className="btn btn-secondary" onClick={() => this.deleteTodo(todo.id)}>Delete</button></td>
+                    <td><button className="btn btn-success" onClick={() => this.updateTodo(todo.id)}>Update</button></td>
                   </tr>
                 ))}
               </tbody>
@@ -73,6 +75,19 @@ class ListTodos extends Component {
         })
         this.showTodos();
       })
+  }
+
+  updateTodo(id) {
+    // let username = AuthenticationService.getLoggedInUserName();
+    // //Sending request
+    // TodoService.deleteTodo(username,id)
+    //   .then((response) => {
+    //     this.setState({
+    //       message : `The todo with id ${id} has been removed.`
+    //     })
+    //     this.showTodos();
+    //   })
+    this.props.history.push(`/todo/${id}`)
   }
 }
 export default ListTodos;

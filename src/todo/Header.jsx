@@ -35,7 +35,7 @@ class Header extends Component {
               }
               {auth &&
                 <li className="nav-item">
-                  <Link className="nav-link" to="list-todo">
+                  <Link className="nav-link" to="/list-todo">
                     Your Todos
                   </Link>
                 </li>
