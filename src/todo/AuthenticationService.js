@@ -15,6 +15,9 @@ class AuthenticationService {
       return false;
     }
   }
+  getLoggedInUserName() {
+    return sessionStorage.getItem("authenticatedUser");
+  }
 }
 
 export default new AuthenticationService();

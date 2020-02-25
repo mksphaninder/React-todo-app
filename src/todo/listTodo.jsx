@@ -1,34 +1,23 @@
 import React, { Component } from "react";
+import TodoService from './TodoService.js';
+import AuthenticationService from "./AuthenticationService.js";
 class ListTodos extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      todos: [
-        {
-          id: 1,
-          description: "Learn react",
-          targetDate: new Date(),
-          isDone: false
-        },
-        {
-          id: 2,
-          description: "Learn Something New",
-          targetDate: new Date(),
-          isDone: false
-        },
-        {
-          id: 3,
-          description: "Learn to Dance",
-          targetDate: new Date(),
-          isDone: false
-        }
-      ]
+      todos : [],
+      message : null
     };
+
+    //Implicit binding methods
+    this.showTodos = this.showTodos.bind(this);
+    this.deleteTodo = this.deleteTodo.bind(this);
   }
   render() {
     return (
       <div className="container">
         <div className="row">
+        {this.state.message && <div className="toastMessage alert-success text-center">{this.state.message}</div>}
           <div className="col-md-12">
             <table className="table table-striped">
               <thead className="thead-dark">
@@ -37,6 +26,7 @@ class ListTodos extends Component {
                   <th scope="col">Description</th>
                   <th scope="col">Target Date</th>
                   <th scope="col">Is done?</th>
+                  <th scope="col">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -45,7 +35,8 @@ class ListTodos extends Component {
                     <td>{todo.id}</td>
                     <td>{todo.description}</td>
                     <td>{todo.targetDate.toString()}</td>
-                    <td>{todo.isDone.toString()}</td>
+                    <td>{todo.done.toString()}</td>
+                    <td><button className="btn btn-secondary" onClick={() => this.deleteTodo(todo.id)}>Delete</button></td>
                   </tr>
                 ))}
               </tbody>
@@ -54,6 +45,34 @@ class ListTodos extends Component {
         </div>
       </div>
     );
+  }
+
+  componentDidMount() {
+    let username = AuthenticationService.getLoggedInUserName();
+    this.showTodos();
+  }
+
+  showTodos() {
+    let username = AuthenticationService.getLoggedInUserName();
+    //updating state
+    TodoService.getTodos(username)
+    .then((response) => {
+      this.setState( {
+        todos : response.data
+      })
+    })
+  }
+
+  deleteTodo(id) {
+    let username = AuthenticationService.getLoggedInUserName();
+    //Sending request
+    TodoService.deleteTodo(username,id)
+      .then((response) => {
+        this.setState({
+          message : `The todo with id ${id} has been removed.`
+        })
+        this.showTodos();
+      })
   }
 }
 export default ListTodos;
