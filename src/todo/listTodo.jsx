@@ -50,7 +50,6 @@ class ListTodos extends Component {
   }
 
   componentDidMount() {
-    let username = AuthenticationService.getLoggedInUserName();
     this.showTodos();
   }
 
